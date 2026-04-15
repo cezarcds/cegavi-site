@@ -32,6 +32,7 @@
   /* Typography */
   --f:  'DM Sans', system-ui, sans-serif;
   --fm: 'DM Mono', 'JetBrains Mono', monospace;
+  --font-display: 'Syne', sans-serif;
 
   /* Spacing scale */
   --s1: 4px;  --s2: 8px;  --s3: 12px; --s4: 16px;
