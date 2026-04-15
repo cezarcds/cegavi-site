@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cegavi — Experience Intelligence Platform</title>
+<meta name="description" content="The only platform that correlates technical APM, digital behavior, and NPS in real time. AI that explains what caused every CX drop — and what to do now.">
+<link rel="canonical" href="https://cegavi.com/en/">
+<link rel="alternate" hreflang="en" href="https://cegavi.com/en/">
+<link rel="alternate" hreflang="pt-BR" href="https://cegavi.com/pt/">
+<link rel="alternate" hreflang="x-default" href="https://cegavi.com/en/">
+<meta property="og:title" content="Cegavi — Experience Intelligence">
+<meta property="og:description" content="From root cause to financial impact in 22 minutes. Powered by AI.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://cegavi.com/en/">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800;900&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/assets/css/main.css">
+<style>
+/* ── Page-specific styles ── */
+.disconnect {
+  margin-top: 28px; padding: 16px 20px;
+  background: var(--blue4); border: 1px solid var(--blue3);
+  border-radius: 10px; display: flex; align-items: center; gap: 12px;
+  font-size: 14px; color: var(--ink2);
+}
+.disconnect strong { color: var(--blue); }
+.silos { display: grid; grid-template-columns: repeat(3,1fr); gap: 16px; margin-top: 48px; }
+.silo {
+  background: var(--white); border: 1px solid var(--bd);
+  border-radius: var(--radius); padding: 26px; position: relative; overflow: hidden;
+  transition: box-shadow .2s;
+}
+.silo:hover { box-shadow: 0 4px 24px rgba(10,10,15,.08); }
+.silo::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; }
+.silo-cx::before   { background: linear-gradient(90deg, var(--blue), #6DA4FF); }
+.silo-tech::before { background: linear-gradient(90deg, var(--teal), #00E8C2); }
+.silo-sup::before  { background: linear-gradient(90deg, #7C3AED, #A78BFA); }
+.silo-icon  { font-size: 24px; margin-bottom: 14px; }
+.silo-title { font-family: var(--fm); font-size: 10px; color: var(--ink4); letter-spacing: 1.5px; text-transform: uppercase; margin-bottom: 12px; }
+.silo-items { display: flex; flex-direction: column; gap: 7px; }
+.silo-item  { font-size: 13px; color: var(--ink3); display: flex; align-items: center; gap: 8px; }
+.silo-item::before { content: ''; width: 4px; height: 4px; border-radius: 50%; background: var(--bd2); flex-shrink: 0; }
+.cascade { display: flex; flex-direction: column; }
+.cstep { display: flex; gap: 20px; position: relative; padding-bottom: 8px; }
+.cstep::before { content: ''; position: absolute; left: 19px; top: 40px; bottom: -8px; width: 1px; background: var(--bd); }
+.cstep:last-child::before { display: none; }
+.cdot { width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 16px; flex-shrink: 0; background: var(--white); border: 2px solid; }
+.cbody { flex: 1; padding: 0 0 24px; }
+.ctime { font-family: var(--fm); font-size: 10px; margin-bottom: 4px; letter-spacing: .5px; }
+.ctitle { font-size: 15px; font-weight: 600; color: var(--ink); margin-bottom: 3px; }
+.cdesc { font-size: 13px; color: var(--ink3); line-height: 1.5; }
+.cchip { display: inline-flex; align-items: center; font-family: var(--fm); font-size: 9px; padding: 2px 8px; border-radius: 4px; margin-top: 6px; border: 1px solid; }
+.pricing-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 16px; margin-top: 48px; }
+.price-card { background: var(--white); border: 2px solid var(--bd); border-radius: var(--radius-lg); padding: 30px; position: relative; transition: all .2s; }
+.price-card:hover:not(.featured) { border-color: var(--bd2); box-shadow: 0 4px 20px rgba(10,10,15,.08); }
+.price-card.featured { border-color: var(--blue); box-shadow: 0 0 0 4px var(--blue4); }
+.price-badge { position: absolute; top: -12px; left: 50%; transform: translateX(-50%); background: var(--blue); color: #fff; font-family: var(--fm); font-size: 10px; padding: 3px 14px; border-radius: 10px; white-space: nowrap; }
+.price-name { font-family: var(--fm); font-size: 11px; color: var(--ink4); letter-spacing: 1.5px; text-transform: uppercase; margin-bottom: 6px; }
+.price-val { font-size: 38px; font-weight: 900; color: var(--ink); line-height: 1; margin-bottom: 4px; letter-spacing: -.02em; }
+.price-period { font-family: var(--fm); font-size: 11px; color: var(--ink4); margin-bottom: 22px; }
+.price-features { list-style: none; display: flex; flex-direction: column; gap: 10px; margin-bottom: 26px; }
+.price-features li { font-size: 14px; color: var(--ink2); display: flex; align-items: flex-start; gap: 9px; }
+.price-features li::before { content: '✓'; color: var(--teal); flex-shrink: 0; font-size: 12px; margin-top: 2px; font-weight: 700; }
+.price-cta { width: 100%; padding: 12px; border-radius: 9px; border: 1px solid var(--bd2); background: transparent; color: var(--ink); font-size: 14px; font-weight: 600; cursor: pointer; transition: all .14s; font-family: var(--f); }
+.price-cta:hover { background: var(--gray1); }
+.price-cta.featured-cta { background: var(--blue); border-color: var(--blue); color: #fff; }
+.price-cta.featured-cta:hover { background: var(--blue2); }
+.lead-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: start; }
+.lead-card { background: var(--white); border: 1px solid var(--bd); border-radius: var(--radius-lg); padding: 32px; position: relative; overflow: hidden; box-shadow: 0 4px 32px rgba(10,10,15,.08); }
+.lead-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; background: linear-gradient(90deg, var(--blue), var(--teal)); }
+.trust-list { display: flex; flex-direction: column; gap: 12px; margin-top: 28px; }
+.trust-item { display: flex; align-items: center; gap: 12px; font-size: 14px; color: var(--ink2); }
+.trust-check { width: 20px; height: 20px; border-radius: 50%; background: var(--teal4); border: 1px solid var(--teal3); display: flex; align-items: center; justify-content: center; font-size: 10px; color: var(--teal); flex-shrink: 0; font-weight: 700; }
+.int-chips { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 12px; }
+.int-chip { padding: 5px 11px; border-radius: 6px; border: 1px solid var(--bd); background: var(--white); font-size: 12px; color: var(--ink3); }
+.form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 12px; }
+.form-message { display: none; padding: 10px 12px; border-radius: 7px; font-size: 12px; font-family: var(--fm); margin-bottom: 10px; }
+.form-message.err { background: rgba(220,38,38,.06); border: 1px solid rgba(220,38,38,.15); color: #DC2626; }
+.form-message.ok  { background: var(--teal4); border: 1px solid var(--teal3); color: var(--teal); }
+.form-submit { width: 100%; padding: 13px; border-radius: 9px; background: var(--blue); color: #fff; font-size: 15px; font-weight: 600; border: none; cursor: pointer; transition: all .15s; font-family: var(--f); }
+.form-submit:hover:not(:disabled) { background: var(--blue2); box-shadow: 0 6px 20px rgba(26,107,255,.25); }
+.form-submit:disabled { opacity: .5; cursor: not-allowed; }
+.form-privacy { font-size: 11px; color: var(--ink4); text-align: center; margin-top: 10px; font-family: var(--fm); }
+.lead-success { display: none; text-align: center; padding: 16px 0; }
+.lead-success-icon { font-size: 44px; margin-bottom: 14px; }
+.lead-success-title { font-size: 19px; font-weight: 700; color: var(--ink); margin-bottom: 8px; }
+.lead-success-sub { font-size: 14px; color: var(--ink3); line-height: 1.6; margin-bottom: 14px; }
+.lead-success-email { font-family: var(--fm); font-size: 12px; color: var(--teal); background: var(--teal4); padding: 5px 12px; border-radius: 5px; display: inline-block; }
+.cta-section { padding: 100px 24px; text-align: center; border-top: 1px solid var(--bd); position: relative; overflow: hidden; }
+.cta-section::before { content: ''; position: absolute; top: -80px; left: 50%; transform: translateX(-50%); width: 600px; height: 400px; border-radius: 50%; background: radial-gradient(circle, var(--blue4), transparent); pointer-events: none; }
+.ai-badge { padding: 16px 20px; background: var(--gray1); border: 1px solid var(--bd); border-radius: 10px; display: flex; align-items: center; gap: 12px; margin-top: 28px; }
+.ai-icon { width: 36px; height: 36px; border-radius: 8px; background: var(--blue4); border: 1px solid var(--blue3); display: flex; align-items: center; justify-content: center; font-size: 16px; flex-shrink: 0; }
+@media (max-width: 768px) {
+  .silos, .pricing-grid, .lead-grid { grid-template-columns: 1fr; }
+  .lead-grid { gap: 40px; }
+  .form-row  { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav" id="nav">
+  <div class="nav-inner">
+    <a class="logo" href="/en/">
+      <svg width="36" height="36" viewBox="0 0 36 36" fill="none">
+        <rect width="36" height="36" rx="9" fill="#1A6BFF"/>
+        <ellipse cx="15" cy="18" rx="5.5" ry="5.5" fill="rgba(0,0,0,.7)"/>
+        <circle cx="15" cy="18" r="2.5" fill="#00C9A7"/>
+        <circle cx="15" cy="18" r="1" fill="#0A0A0F"/>
+        <path d="M22 13.5C24.5 15 26 16.4 26 18s-1.5 3-4 4.5" stroke="white" stroke-width="2" stroke-linecap="round" fill="none" opacity=".9"/>
+        <path d="M24 10.5C28 12.8 30.5 15.2 30.5 18s-2.5 5.2-6.5 7.5" stroke="white" stroke-width="1.5" stroke-linecap="round" fill="none" opacity=".5"/>
+      </svg>
+      <div>
+        <div class="logo-wordmark"><span class="logo-ce">Ce</span><span class="logo-gav">gav</span><span class="logo-i">i</span></div>
+        <div class="logo-sub">Experience Intelligence</div>
+      </div>
+    </a>
+    <nav class="nav-links">
+      <a href="#problem">The Problem</a>
+      <a href="#how-it-works">How It Works</a>
+      <a href="/en/pricing.html">Pricing</a>
+      <a href="/en/blog/">Blog</a>
+    </nav>
+    <div class="nav-right">
+      <div class="lang-pill">
+        <a href="/en/" class="active" onclick="localStorage.setItem('cegavi_lang','en')">EN</a>
+        <span></span>
+        <a href="/pt/" onclick="localStorage.setItem('cegavi_lang','pt')">PT</a>
+      </div>
+      <a class="btn btn-ghost btn-sm" href="#">Sign In</a>
+      <a class="btn btn-primary btn-sm" href="#demo">Book Demo</a>
+    </div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-grid"></div>
+  <div class="hero-content">
+    <div class="badge badge-teal mb-5">
+      <span class="badge-dot"></span>
+      Real-time causal correlation · Powered by AI
+    </div>
+    <h1 class="mb-4">
+      See what your data<br>
+      <span class="text-blue">doesn't</span>
+      <span class="text-teal"> tell you.</span>
+    </h1>
+    <p class="mb-6" style="font-size:clamp(16px,2vw,19px);max-width:580px;margin-left:auto;margin-right:auto">
+      The only platform that correlates technical APM, digital behavior, and NPS in real time — AI that explains what caused every drop and what to do now.
+    </p>
+    <div class="hero-actions mb-8">
+      <a class="btn btn-primary btn-lg" href="#demo">
+        Book Free Demo
+        <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 8h10M9 4l4 4-4 4"/></svg>
+      </a>
+      <a class="btn btn-ghost btn-lg" href="#how-it-works">See how it works</a>
+    </div>
+    <div class="hero-kpis">
+      <div class="kpi"><div class="kpi-value blue">91%</div><div class="kpi-label">Confidence</div></div>
+      <div class="kpi-sep"></div>
+      <div class="kpi"><div class="kpi-value teal">22 min</div><div class="kpi-label">Lead Time</div></div>
+      <div class="kpi-sep"></div>
+      <div class="kpi"><div class="kpi-value">+R$70M</div><div class="kpi-label">CX Projects</div></div>
+      <div class="kpi-sep"></div>
+      <div class="kpi"><div class="kpi-value teal">−23%</div><div class="kpi-label">Operational Cost</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- PROBLEM -->
+<section id="problem" class="section" style="background:var(--gray1)">
+  <div class="container">
+    <div class="section-label">The Problem</div>
+    <h2 class="mb-4">Data that never<br><span class="text-blue">talks</span> to each other.</h2>
+    <p class="section-sub mb-6" style="max-width:560px">CX, Engineering, and Support all look at different systems. Nobody sees the connection between a technical incident and an NPS drop.</p>
+    <div class="silos">
+      <div class="silo silo-cx">
+        <div class="silo-icon">📡</div>
+        <div class="silo-title">CX Team</div>
+        <div class="silo-items">
+          <div class="silo-item">NPS dropped 11 points</div>
+          <div class="silo-item">22% detractors</div>
+          <div class="silo-item">CSAT 3.6/5</div>
+          <div class="silo-item">Feedback: "app crashed"</div>
+        </div>
+      </div>
+      <div class="silo silo-tech">
+        <div class="silo-icon">⚡</div>
+        <div class="silo-title">Engineering</div>
+        <div class="silo-items">
+          <div class="silo-item">payment-api: 1,240ms</div>
+          <div class="silo-item">Error rate: 8.4%</div>
+          <div class="silo-item">SEV-1 active</div>
+          <div class="silo-item">DXS Technical: 4.9/10</div>
+        </div>
+      </div>
+      <div class="silo silo-sup">
+        <div class="silo-icon">🎫</div>
+        <div class="silo-title">Support</div>
+        <div class="silo-items">
+          <div class="silo-item">+67% ticket volume</div>
+          <div class="silo-item">14 SLA violations</div>
+          <div class="silo-item">tag: payment-issue</div>
+          <div class="silo-item">MTTR: 18 min</div>
+        </div>
+      </div>
+    </div>
+    <div class="disconnect">
+      💸
+      <span><strong>$9,000+/hour lost</strong> while these 3 teams stare at different systems — not knowing the same incident caused everything.</span>
+    </div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section id="how-it-works" class="section">
+  <div class="container" style="display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:start">
+    <div>
+      <div class="section-label">How It Works</div>
+      <h2 class="mb-4">From root cause to financial impact in <span class="text-teal">22 minutes</span>.</h2>
+      <p class="mb-6" style="font-size:17px;max-width:480px">Cegavi's engine correlates 5 sources in real time and delivers the full causal chain with an actionable recommendation.</p>
+      <div class="ai-badge">
+        <div class="ai-icon">✦</div>
+        <div>
+          <div style="font-size:13px;font-weight:600;color:var(--ink);margin-bottom:2px">Powered by Claude AI</div>
+          <div style="font-size:12px;color:var(--ink4)">CegaAgent answers any question about your operation in real time</div>
+        </div>
+      </div>
+    </div>
+    <div class="cascade">
+      <div class="cstep">
+        <div class="cdot" style="border-color:rgba(26,107,255,.3);color:var(--blue)">⚡</div>
+        <div class="cbody">
+          <div class="ctime" style="color:var(--blue)">14:07</div>
+          <div class="ctitle">Elastic APM detects degradation</div>
+          <div class="cdesc">payment-api → 1,240ms P95 · Error rate: 8.4%</div>
+          <span class="cchip" style="color:var(--blue);border-color:var(--blue3);background:var(--blue4)">SEV-1</span>
+        </div>
+      </div>
+      <div class="cstep">
+        <div class="cdot" style="border-color:rgba(0,169,139,.3);color:var(--teal)">📊</div>
+        <div class="cbody">
+          <div class="ctime" style="color:var(--teal)">+4 min</div>
+          <div class="ctitle">Medallia DXA registers frustration</div>
+          <div class="cdesc">Technical DXS drops 7.1 → 4.9 · Rage clicks +4 at checkout</div>
+          <span class="cchip" style="color:var(--teal);border-color:var(--teal3);background:var(--teal4)">r = −0.89</span>
+        </div>
+      </div>
+      <div class="cstep">
+        <div class="cdot" style="border-color:rgba(124,58,237,.3);color:#7C3AED">🎫</div>
+        <div class="cbody">
+          <div class="ctime" style="color:#7C3AED">+12 min</div>
+          <div class="ctitle">Zendesk: tickets +67%</div>
+          <div class="cdesc">Tag: payment-issue · 14 SLA violations</div>
+          <span class="cchip" style="color:#7C3AED;border-color:rgba(124,58,237,.2);background:rgba(124,58,237,.06)">SLA at risk</span>
+        </div>
+      </div>
+      <div class="cstep">
+        <div class="cdot" style="border-color:rgba(26,107,255,.5);color:var(--blue)">🎯</div>
+        <div class="cbody">
+          <div class="ctime" style="color:var(--blue)">+22 min</div>
+          <div class="ctitle">Cegavi confirms causal cascade</div>
+          <div class="cdesc">91% confidence · Impact: $9k+/h · Action: activate secondary provider</div>
+          <span class="cchip" style="color:var(--teal);border-color:var(--teal3);background:var(--teal4)">✦ AI</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FEATURES -->
+<section class="section" style="background:var(--gray1)">
+  <div class="container">
+    <div class="section-label">Features</div>
+    <h2 class="mb-4">Five capabilities no competitor<br>has <span class="text-teal">together</span>.</h2>
+    <div class="grid-3" style="margin-top:48px">
+      <div class="card"><div class="card-icon card-icon-teal">✦</div><div class="card-title">CegaAgent with Real AI</div><div class="card-desc">Powered by Claude. Analyzes live correlations, generates executive briefings, and answers any question about your operation in real time.</div></div>
+      <div class="card"><div class="card-icon card-icon-blue">🔗</div><div class="card-title">Causal Correlation Engine</div><div class="card-desc">Pearson r across time series from 5 simultaneous sources. Automatically detects 5–30 minute causal lags, no manual configuration.</div></div>
+      <div class="card"><div class="card-icon card-icon-teal">🎯</div><div class="card-title">Identity Resolution</div><div class="card-desc">Links the same customer across all sources with configurable attribution windows. Individual + aggregate correlation simultaneously.</div></div>
+      <div class="card"><div class="card-icon card-icon-blue">📡</div><div class="card-title">Connections Wizard</div><div class="card-desc">5 steps per source: credentials, scope, mapping, AI filter, validation. Reduces data noise by ~55% before it enters the engine.</div></div>
+      <div class="card"><div class="card-icon card-icon-teal">📊</div><div class="card-title">Vertical Benchmarks</div><div class="card-desc">Proprietary dataset of anonymized correlations. Compare your NPS, DXS, and correlation lag against your industry median.</div></div>
+      <div class="card"><div class="card-icon card-icon-blue">💯</div><div class="card-title">Real-Time Health Score</div><div class="card-desc">0–100 score weighted across 4 sources (NPS 30%, DXS 25%, APM 30%, Support 15%). Updated every 5 minutes with full history.</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- DEMO / LEAD FORM -->
+<section id="demo" class="section" style="background:var(--gray1)">
+  <div class="container">
+    <div class="lead-grid">
+      <div>
+        <div class="section-label">Talk to a specialist</div>
+        <h2 class="mb-4">Ready to see your first correlation?</h2>
+        <p class="mb-6" style="font-size:16px">30-minute demo with real data — live incident cascade, CegaAgent answering questions about your operation, and the first detected correlation.</p>
+        <div class="trust-list">
+          <div class="trust-item"><div class="trust-check">✓</div>Full setup in 1–3 days</div>
+          <div class="trust-item"><div class="trust-check">✓</div>No credit card for the demo</div>
+          <div class="trust-item"><div class="trust-check">✓</div>Integrates with Medallia, Elastic, Zendesk</div>
+          <div class="trust-item"><div class="trust-check">✓</div>LGPD / GDPR compliant · Data in Brazil</div>
+        </div>
+        <div style="margin-top:28px">
+          <div style="font-family:var(--fm);font-size:9px;color:var(--ink4);letter-spacing:1.5px;text-transform:uppercase;margin-bottom:10px">Integrates with</div>
+          <div class="int-chips">
+            <span class="int-chip">🎯 Medallia</span>
+            <span class="int-chip">⚡ Elastic</span>
+            <span class="int-chip">🎫 Zendesk</span>
+            <span class="int-chip">🔧 ServiceNow</span>
+            <span class="int-chip">🐶 Datadog</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="lead-card">
+        <div id="lead-form">
+          <div style="font-size:18px;font-weight:700;color:var(--ink);margin-bottom:4px">Book a free demo</div>
+          <div style="font-family:var(--fm);font-size:12px;color:var(--ink4);margin-bottom:22px">We respond within 4 business hours</div>
+          <div class="form-row">
+            <div>
+              <label class="form-label" for="lf-name">Name</label>
+              <input class="form-input" id="lf-name" type="text" placeholder="Rafael Pereira" autocomplete="name">
+            </div>
+            <div>
+              <label class="form-label" for="lf-company">Company</label>
+              <input class="form-input" id="lf-company" type="text" placeholder="Acme Corp" autocomplete="organization">
+            </div>
+          </div>
+          <div class="form-field">
+            <label class="form-label" for="lf-email">Corporate email</label>
+            <input class="form-input" id="lf-email" type="email" placeholder="you@company.com" autocomplete="email">
+          </div>
+          <div class="form-field">
+            <label class="form-label" for="lf-platform">Platform you use</label>
+            <select class="form-select" id="lf-platform">
+              <option value="">Select…</option>
+              <option>Medallia MEC / DXA</option>
+              <option>Elastic APM</option>
+              <option>Qualtrics XM</option>
+              <option>Zendesk / ServiceNow</option>
+              <option>Datadog</option>
+              <option>Other / Not sure</option>
+            </select>
+          </div>
+          <div class="form-field">
+            <label class="form-label" for="lf-message">Main challenge <span style="opacity:.5;font-size:8px">(optional)</span></label>
+            <textarea class="form-textarea" id="lf-message" rows="2" placeholder="e.g. understand why NPS drops after technical incidents"></textarea>
+          </div>
+          <div class="form-message" id="lead-form-msg"></div>
+          <button class="form-submit" id="lead-btn" onclick="submitLead({lang:'en'})">Book my demo →</button>
+          <div class="form-privacy">Your data is protected by GDPR/LGPD · We never share it</div>
+        </div>
+        <div class="lead-success" id="lead-success">
+          <div class="lead-success-icon">🎯</div>
+          <div class="lead-success-title">Request received!</div>
+          <div class="lead-success-sub">Our team will reach out within 4 business hours to schedule the demo.</div>
+          <div class="lead-success-email" id="lf-success-email"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<div class="cta-section">
+  <div style="max-width:600px;margin:0 auto;position:relative;z-index:1">
+    <h2 class="mb-4">Ready to turn CX into financial results?</h2>
+    <p class="mb-6" style="font-size:17px">Start in minutes. First correlation in less than 1 hour.</p>
+    <div style="display:flex;justify-content:center;gap:12px;flex-wrap:wrap;margin-bottom:16px">
+      <a class="btn btn-primary btn-lg" href="#demo">Book Free Demo</a>
+      <a class="btn btn-ghost btn-lg" href="/en/pricing.html">See plans & pricing</a>
+    </div>
+    <div style="font-family:var(--fm);font-size:11px;color:var(--ink4);letter-spacing:.5px">No credit card · Setup in 1–3 days · Cancel anytime</div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <a class="logo" href="/en/" style="margin-bottom:12px;display:inline-flex">
+          <svg width="28" height="28" viewBox="0 0 36 36" fill="none"><rect width="36" height="36" rx="9" fill="#1A6BFF"/><ellipse cx="15" cy="18" rx="5.5" ry="5.5" fill="rgba(0,0,0,.7)"/><circle cx="15" cy="18" r="2.5" fill="#00C9A7"/><circle cx="15" cy="18" r="1" fill="#0A0A0F"/><path d="M22 13.5C24.5 15 26 16.4 26 18s-1.5 3-4 4.5" stroke="white" stroke-width="2" stroke-linecap="round" fill="none" opacity=".9"/><path d="M24 10.5C28 12.8 30.5 15.2 30.5 18s-2.5 5.2-6.5 7.5" stroke="white" stroke-width="1.5" stroke-linecap="round" fill="none" opacity=".5"/></svg>
+          <div style="margin-left:10px"><div class="logo-wordmark"><span class="logo-ce">Ce</span><span class="logo-gav">gav</span><span class="logo-i">i</span></div><div class="logo-sub">Experience Intelligence</div></div>
+        </a>
+        <div class="footer-brand-desc">The Experience Intelligence platform that connects APM, DXS, and NPS in AI-powered causal correlations.</div>
+        <div class="footer-email">contato@cegavi.com</div>
+      </div>
+      <div>
+        <div class="footer-col-title">Product</div>
+        <ul class="footer-links">
+          <li><a href="#how-it-works">How It Works</a></li>
+          <li><a href="/en/pricing.html">Pricing</a></li>
+          <li><a href="/en/blog/">Blog</a></li>
+          <li><a href="#demo">Book Demo</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="footer-col-title">Integrations</div>
+        <ul class="footer-links">
+          <li><a href="#">Medallia MEC</a></li>
+          <li><a href="#">Medallia DXA</a></li>
+          <li><a href="#">Elastic APM</a></li>
+          <li><a href="#">Zendesk</a></li>
+          <li><a href="#">ServiceNow</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="footer-col-title">Company</div>
+        <ul class="footer-links">
+          <li><a href="#">About</a></li>
+          <li><a href="/en/blog/">Blog</a></li>
+          <li><a href="#">Privacy Policy</a></li>
+          <li><a href="#">Terms of Use</a></li>
+          <li><a href="mailto:contato@cegavi.com">Contact</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2025 Cegavi. All rights reserved.</span>
+      <span>Built in Brazil 🇧🇷</span>
+    </div>
+  </div>
+</footer>
+
+<script src="/assets/js/main.js"></script>
+</body>
+</html>

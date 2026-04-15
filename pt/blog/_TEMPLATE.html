@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+<!--
+  ╔══════════════════════════════════════════════════════════════╗
+  ║  CEGAVI — ARTICLE TEMPLATE (PT)                             ║
+  ║                                                             ║
+  ║  HOW TO USE:                                                ║
+  ║  1. Copy this file to /pt/blog/seu-slug.html               ║
+  ║  2. Fill in the 7 marked fields below (search "EDIT:")      ║
+  ║  3. Replace the article body between the <article> tags     ║
+  ║  4. Done. No other changes needed.                          ║
+  ╚══════════════════════════════════════════════════════════════╝
+-->
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<!-- EDIT: 1 — Page title (60 chars max for SEO) -->
+<title>Título do Artigo Aqui — Blog Cegavi</title>
+
+<!-- EDIT: 2 — Meta description (155 chars max) -->
+<meta name="description" content="A clear, compelling 1–2 sentence summary of this article. Should make someone want to click. Around 155 characters max.">
+
+<!-- EDIT: 3 — Canonical URL -->
+<link rel="canonical" href="https://cegavi.com/en/blog/your-article-slug.html">
+
+<!-- EDIT: 4 — hreflang (point to PT equivalent if it exists) -->
+<link rel="alternate" hreflang="pt-BR"   href="https://cegavi.com/en/blog/your-article-slug.html">
+<link rel="alternate" hreflang="pt-BR" href="https://cegavi.com/pt/blog/slug-em-portugues.html">
+<link rel="alternate" hreflang="x-default" href="https://cegavi.com/en/blog/your-article-slug.html">
+
+<!-- EDIT: 5 — OG / Social (for LinkedIn, Twitter shares) -->
+<meta property="og:title"       content="Article Title Goes Here">
+<meta property="og:description" content="A clear, compelling 1–2 sentence summary.">
+<meta property="og:type"        content="article">
+<meta property="og:url"         content="https://cegavi.com/en/blog/your-article-slug.html">
+<meta property="og:image"       content="https://cegavi.com/assets/img/blog/your-cover-image.jpg">
+<meta name="twitter:card"       content="summary_large_image">
+
+<!-- Schema.org structured data — update dates and author -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "Article Title Goes Here",
+  "description": "A clear, compelling 1–2 sentence summary.",
+  "image": "https://cegavi.com/assets/img/blog/your-cover-image.jpg",
+  "author": { "@type": "Person", "name": "Cezar Cunha" },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Cegavi",
+    "logo": { "@type": "ImageObject", "url": "https://cegavi.com/assets/img/logo.png" }
+  },
+  "datePublished": "2025-04-09",
+  "dateModified":  "2025-04-09",
+  "mainEntityOfPage": { "@type": "WebPage", "@id": "https://cegavi.com/en/blog/your-article-slug.html" }
+}
+</script>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800;900&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/assets/css/main.css">
+
+<style>
+/* Article reading progress bar */
+.progress-bar {
+  position: fixed; top: 0; left: 0; height: 3px;
+  background: linear-gradient(90deg, var(--blue), var(--teal));
+  z-index: 200; width: 0; transition: width .1s;
+}
+/* Related articles */
+.related { background: var(--gray1); padding: 64px 24px; }
+.related h3 { text-align: center; margin-bottom: 40px; font-size: 24px; }
+/* Article nav breadcrumb */
+.article-breadcrumb {
+  position: fixed; top: 64px; left: 0; right: 0; z-index: 90;
+  background: rgba(255,255,255,.96); backdrop-filter: blur(8px);
+  border-bottom: 1px solid var(--bd); padding: 8px 24px;
+  display: none;
+  font-family: var(--fm); font-size: 11px; color: var(--ink4);
+}
+.article-breadcrumb.visible { display: flex; align-items: center; gap: 8px; }
+.article-breadcrumb a { color: var(--ink4); text-decoration: none; }
+.article-breadcrumb a:hover { color: var(--ink); }
+.breadcrumb-sep { opacity: .4; }
+/* Author box */
+.author-box {
+  display: flex; align-items: center; gap: 16px;
+  padding: 20px 24px; background: var(--gray1);
+  border: 1px solid var(--bd); border-radius: var(--radius);
+  margin: 48px 0;
+}
+.author-avatar {
+  width: 52px; height: 52px; border-radius: 50%;
+  background: var(--blue); display: flex; align-items: center;
+  justify-content: center; font-size: 20px; font-weight: 700;
+  color: #fff; flex-shrink: 0;
+}
+.author-name { font-size: 14px; font-weight: 700; color: var(--ink); margin-bottom: 3px; }
+.author-bio  { font-size: 13px; color: var(--ink3); line-height: 1.5; }
+/* Share buttons */
+.share-row {
+  display: flex; align-items: center; gap: 10px;
+  padding: 24px 0; border-top: 1px solid var(--bd);
+  margin-top: 40px;
+}
+.share-label { font-family: var(--fm); font-size: 11px; color: var(--ink4); letter-spacing: 1px; text-transform: uppercase; margin-right: 4px; }
+.share-btn {
+  padding: 7px 14px; border-radius: 7px; border: 1px solid var(--bd);
+  background: transparent; color: var(--ink3); font-size: 13px;
+  cursor: pointer; text-decoration: none; transition: all .13s;
+  display: inline-flex; align-items: center; gap: 6px; font-family: var(--f);
+}
+.share-btn:hover { background: var(--gray1); border-color: var(--bd2); color: var(--ink); }
+/* CTA box inside article */
+.article-cta {
+  background: linear-gradient(135deg, var(--blue4), var(--teal4));
+  border: 1px solid var(--blue3); border-radius: var(--radius);
+  padding: 28px 32px; margin: 48px 0; text-align: center;
+}
+.article-cta h3 { font-size: 20px; margin-bottom: 8px; color: var(--ink); }
+.article-cta p  { font-size: 14px; color: var(--ink3); margin-bottom: 20px; }
+</style>
+</head>
+<body>
+
+<!-- Reading progress bar -->
+<div class="progress-bar" id="progress"></div>
+
+<!-- Sticky breadcrumb (appears on scroll) -->
+<div class="article-breadcrumb" id="breadcrumb">
+  <a href="/pt/">Home</a>
+  <span class="breadcrumb-sep">›</span>
+  <a href="/pt/blog/">Blog</a>
+  <span class="breadcrumb-sep">›</span>
+  <!-- EDIT: 6 — Short article title for breadcrumb -->
+  <span>Article Title</span>
+</div>
+
+<!-- NAV -->
+<nav class="nav" id="nav">
+  <div class="nav-inner">
+    <a class="logo" href="/pt/">
+      <svg width="36" height="36" viewBox="0 0 36 36" fill="none">
+        <rect width="36" height="36" rx="9" fill="#1A6BFF"/>
+        <ellipse cx="15" cy="18" rx="5.5" ry="5.5" fill="rgba(0,0,0,.7)"/>
+        <circle cx="15" cy="18" r="2.5" fill="#00C9A7"/>
+        <circle cx="15" cy="18" r="1" fill="#0A0A0F"/>
+        <path d="M22 13.5C24.5 15 26 16.4 26 18s-1.5 3-4 4.5" stroke="white" stroke-width="2" stroke-linecap="round" fill="none" opacity=".9"/>
+        <path d="M24 10.5C28 12.8 30.5 15.2 30.5 18s-2.5 5.2-6.5 7.5" stroke="white" stroke-width="1.5" stroke-linecap="round" fill="none" opacity=".5"/>
+      </svg>
+      <div>
+        <div class="logo-wordmark"><span class="logo-ce">Ce</span><span class="logo-gav">gav</span><span class="logo-i">i</span></div>
+        <div class="logo-sub">Experience Intelligence</div>
+      </div>
+    </a>
+    <nav class="nav-links">
+      <a href="/en/#problem">The Problem</a>
+      <a href="/en/#how-it-works">How It Works</a>
+      <a href="/pt/precos.html">Pricing</a>
+      <a href="/pt/blog/" class="active">Blog</a>
+    </nav>
+    <div class="nav-right">
+      <div class="lang-pill">
+        <a href="/pt/blog/seu-artigo-slug.html" class="active" onclick="localStorage.setItem('cegavi_lang','en')">EN</a>
+        <span></span>
+        <!-- EDIT: 7 — EN equivalent URL (or remove link if no PT version) -->
+        <a href="/pt/blog/seu-artigo-slug.html" class="active" onclick="localStorage.setItem('cegavi_lang','pt')">PT</a>
+      </div>
+      <a class="btn btn-primary btn-sm" href="/pt/#demo">Agendar Demo</a>
+    </div>
+  </div>
+</nav>
+
+<!-- ARTICLE HEADER -->
+<header class="article-header">
+  <!-- Category badge -->
+  <div class="badge badge-teal" style="margin-bottom:20px">
+    <!-- EDIT: Category — e.g. "Experience Intelligence" / "CX Strategy" / "Product" -->
+    Experience Intelligence
+  </div>
+
+  <!-- Main title -->
+  <h1 style="max-width:760px;margin:0 auto 20px">
+    <!-- EDIT: Full article title -->
+    Article Title Goes Here: Make It Specific and Keyword-Rich
+  </h1>
+
+  <!-- Subtitle / deck -->
+  <p style="font-size:19px;color:var(--ink3);max-width:620px;margin:0 auto 0;line-height:1.65">
+    <!-- EDIT: 1–2 sentence summary that complements the title -->
+    A compelling subtitle that adds context to the title and makes the reader want to continue. Keep it under 2 sentences.
+  </p>
+
+  <!-- Meta: author + date + read time -->
+  <div class="article-meta">
+    <span>Cezar Cunha</span>
+    <span>·</span>
+    <!-- EDIT: Publication date -->
+    <span>April 9, 2025</span>
+    <span>·</span>
+    <!-- EDIT: Estimated read time -->
+    <span>8 min read</span>
+  </div>
+</header>
+
+<!-- COVER IMAGE -->
+<div class="article-cover container">
+  <!-- EDIT: Cover image. Ideal size: 1200×630px. Alt text required for SEO. -->
+  <!-- Replace or remove this block if you don't have an image yet -->
+  <div style="width:100%;height:420px;background:linear-gradient(135deg,var(--blue4),var(--teal4));display:flex;align-items:center;justify-content:center;border-radius:var(--radius-lg);border:1px solid var(--bd)">
+    <div style="text-align:center;color:var(--ink3)">
+      <div style="font-size:48px;margin-bottom:12px">📸</div>
+      <div style="font-family:var(--fm);font-size:12px;letter-spacing:1px;text-transform:uppercase">Cover image goes here<br>Recommended: 1200×630px</div>
+    </div>
+  </div>
+  <!-- Real image example:
+  <img src="/assets/img/blog/your-cover-image.jpg" alt="Descriptive alt text for SEO" loading="lazy">
+  -->
+</div>
+
+<!-- ARTICLE BODY -->
+<article class="article-body">
+
+  <!--
+  ================================================================
+  CONTENT GUIDE — delete this comment block before publishing
+  ================================================================
+
+  HEADINGS:
+    <h2>Section Title</h2>           — Major sections
+    <h3>Subsection Title</h3>        — Subsections within a section
+
+  PARAGRAPHS:
+    <p>Your text here.</p>
+
+  LISTS:
+    <ul><li>Item</li><li>Item</li></ul>   — Bullet list
+    <ol><li>Step 1</li><li>Step 2</li></ol> — Numbered list
+
+  BLOCKQUOTE (for key insights):
+    <blockquote><p>Key insight or quote here.</p></blockquote>
+
+  CALLOUT BOX (blue, for tips or important notes):
+    <div class="callout"><p>💡 <strong>Key insight:</strong> Your callout text here.</p></div>
+
+  INLINE CTA (appears mid-article to drive demo signups):
+    <div class="article-cta">
+      <h3>See this in action</h3>
+      <p>Short description of what they'll see in the demo.</p>
+      <a class="btn btn-primary" href="/pt/#demo">Book a free demo →</a>
+    </div>
+
+  IMAGE WITH CAPTION:
+    <img src="/assets/img/blog/image-name.jpg" alt="Descriptive alt text" loading="lazy">
+    <p class="img-caption">Caption explaining what the image shows.</p>
+
+  CODE BLOCK:
+    <pre><code>your code here</code></pre>
+
+  ================================================================
+  -->
+
+  <p>
+    Start with a strong opening paragraph. State the core problem or insight immediately. Don't bury the lead. The first 2–3 sentences should make the reader nod and think "yes, this is exactly my problem."
+  </p>
+
+  <p>
+    Continue with context. Why does this matter now? What's changed in the industry? Ground the article in something timely and specific to your reader's world.
+  </p>
+
+  <h2>First Major Section Title</h2>
+
+  <p>
+    Introduce the first major idea. Keep paragraphs short — 3–4 sentences max. White space is your friend, especially on mobile.
+  </p>
+
+  <p>
+    Expand on the idea with a concrete example or data point. Specificity beats generality. "NPS dropped 11 points in 22 minutes after a payment-api degradation" is better than "technical issues hurt NPS scores."
+  </p>
+
+  <blockquote>
+    <p>Key insight or powerful quote from the article goes here. Use this sparingly — once or twice per article for maximum impact.</p>
+  </blockquote>
+
+  <h3>Subsection Title</h3>
+
+  <p>
+    Supporting detail, data, or example for the subsection. If you have a chart or diagram, insert an image here.
+  </p>
+
+  <ul>
+    <li>First key point or takeaway</li>
+    <li>Second key point with a bit more detail if needed</li>
+    <li>Third key point</li>
+  </ul>
+
+  <!-- Mid-article CTA — appears naturally after the first major section -->
+  <div class="article-cta">
+    <h3>See this in your data</h3>
+    <p>Book a 30-minute demo and see Cegavi detect the causal chain between your technical incidents and NPS drops.</p>
+    <a class="btn btn-primary" href="/pt/#demo">Book a free demo →</a>
+  </div>
+
+  <h2>Second Major Section Title</h2>
+
+  <p>
+    Continue the article. Each major section should flow naturally from the previous one. The reader should feel like they're on a journey, not reading a list.
+  </p>
+
+  <img src="/assets/img/blog/example-image.jpg" alt="Descriptive alt text explaining what the image shows" loading="lazy" style="display:none">
+  <!--
+    Remove style="display:none" when you have a real image.
+    Always include alt text — it's required for SEO and accessibility.
+  -->
+
+  <div class="callout">
+    <p>💡 <strong>Pro tip:</strong> This is a callout box for important tips or notes. Use it to highlight information that would otherwise get lost in the body text.</p>
+  </div>
+
+  <h2>Third Major Section Title</h2>
+
+  <p>
+    Continue with the third main point. A typical article has 3–5 major sections. Each section should advance the argument or narrative.
+  </p>
+
+  <ol>
+    <li><strong>First step or point</strong> — brief explanation of what this means</li>
+    <li><strong>Second step or point</strong> — brief explanation</li>
+    <li><strong>Third step or point</strong> — brief explanation</li>
+  </ol>
+
+  <h2>Conclusion</h2>
+
+  <p>
+    Summarize the key takeaways in 2–3 sentences. Don't introduce new ideas here — just reinforce what the reader learned and why it matters.
+  </p>
+
+  <p>
+    End with a clear next step. What should the reader do now? This should flow naturally into the CTA below.
+  </p>
+
+  <!-- Author box -->
+  <div class="author-box">
+    <div class="author-avatar">C</div>
+    <div>
+      <div class="author-name">Cezar Cunha</div>
+      <div class="author-bio">15+ years leading CX strategy at enterprise companies across LATAM. Co-founder of Zubit, former V8 Consulting. Building Cegavi to make Experience Intelligence accessible to every CX team.</div>
+    </div>
+  </div>
+
+  <!-- Share buttons -->
+  <div class="share-row">
+    <span class="share-label">Share</span>
+    <a class="share-btn" id="share-linkedin" href="#" target="_blank" rel="noopener">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M20.5 2h-17A1.5 1.5 0 002 3.5v17A1.5 1.5 0 003.5 22h17a1.5 1.5 0 001.5-1.5v-17A1.5 1.5 0 0020.5 2zM8 19H5v-9h3zM6.5 8.25A1.75 1.75 0 118.3 6.5a1.78 1.78 0 01-1.8 1.75zM19 19h-3v-4.74c0-1.42-.6-1.93-1.38-1.93A1.74 1.74 0 0013 14.19a.66.66 0 000 .14V19h-3v-9h2.9v1.3a3.11 3.11 0 012.7-1.4c1.55 0 3.36.86 3.36 3.66z"/></svg>
+      LinkedIn
+    </a>
+    <a class="share-btn" id="share-twitter" href="#" target="_blank" rel="noopener">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+      Twitter / X
+    </a>
+    <button class="share-btn" onclick="navigator.clipboard.writeText(window.location.href).then(()=>this.textContent='✓ Copied!')">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 13a5 5 0 007.54.54l3-3a5 5 0 00-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 00-7.54-.54l-3 3a5 5 0 007.07 7.07l1.71-1.71"/></svg>
+      Copy link
+    </button>
+  </div>
+
+</article>
+
+<!-- BOTTOM CTA -->
+<section style="padding:80px 24px;text-align:center;border-top:1px solid var(--bd)">
+  <div style="max-width:560px;margin:0 auto">
+    <h2 style="margin-bottom:14px">Ready to see this in your data?</h2>
+    <p style="font-size:17px;color:var(--ink3);margin-bottom:28px">Book a 30-minute demo and see Cegavi detect the causal chain between your technical incidents and NPS drops — with your data.</p>
+    <div style="display:flex;justify-content:center;gap:12px;flex-wrap:wrap">
+      <a class="btn btn-primary btn-lg" href="/pt/#demo">Book Free Demo</a>
+      <a class="btn btn-ghost btn-lg" href="/pt/blog/">Mais artigos</a>
+    </div>
+  </div>
+</section>
+
+<!-- RELATED ARTICLES -->
+<section class="related">
+  <div class="container">
+    <h3>Related articles</h3>
+    <div class="blog-grid">
+      <!-- EDIT: Replace with real related articles. Copy blog-card pattern. -->
+      <a class="blog-card" href="/en/blog/what-is-experience-intelligence.html">
+        <div class="blog-card-img" style="background:linear-gradient(135deg,var(--blue4),var(--teal4));display:flex;align-items:center;justify-content:center;font-size:32px">📊</div>
+        <div class="blog-card-body">
+          <div class="blog-card-tag">Experience Intelligence</div>
+          <div class="blog-card-title">What is Experience Intelligence?</div>
+          <div class="blog-card-excerpt">Why correlating APM, DXS, and NPS changes everything for CX teams.</div>
+          <div class="blog-card-meta">April 2025 · 6 min read</div>
+        </div>
+      </a>
+      <a class="blog-card" href="/pt/blog/">
+        <div class="blog-card-img" style="background:linear-gradient(135deg,var(--teal4),var(--blue4));display:flex;align-items:center;justify-content:center;font-size:32px">⚡</div>
+        <div class="blog-card-body">
+          <div class="blog-card-tag">CX Strategy</div>
+          <div class="blog-card-title">Coming soon</div>
+          <div class="blog-card-excerpt">More articles on Experience Intelligence, CX strategy, and AI.</div>
+          <div class="blog-card-meta">Coming soon</div>
+        </div>
+      </a>
+      <a class="blog-card" href="/pt/blog/">
+        <div class="blog-card-img" style="background:linear-gradient(135deg,rgba(124,58,237,.1),var(--blue4));display:flex;align-items:center;justify-content:center;font-size:32px">🎯</div>
+        <div class="blog-card-body">
+          <div class="blog-card-tag">Product</div>
+          <div class="blog-card-title">Coming soon</div>
+          <div class="blog-card-excerpt">More articles on Experience Intelligence, CX strategy, and AI.</div>
+          <div class="blog-card-meta">Coming soon</div>
+        </div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <a class="logo" href="/pt/" style="margin-bottom:12px;display:inline-flex">
+          <svg width="28" height="28" viewBox="0 0 36 36" fill="none"><rect width="36" height="36" rx="9" fill="#1A6BFF"/><ellipse cx="15" cy="18" rx="5.5" ry="5.5" fill="rgba(0,0,0,.7)"/><circle cx="15" cy="18" r="2.5" fill="#00C9A7"/><circle cx="15" cy="18" r="1" fill="#0A0A0F"/><path d="M22 13.5C24.5 15 26 16.4 26 18s-1.5 3-4 4.5" stroke="white" stroke-width="2" stroke-linecap="round" fill="none" opacity=".9"/><path d="M24 10.5C28 12.8 30.5 15.2 30.5 18s-2.5 5.2-6.5 7.5" stroke="white" stroke-width="1.5" stroke-linecap="round" fill="none" opacity=".5"/></svg>
+          <div style="margin-left:10px"><div class="logo-wordmark"><span class="logo-ce">Ce</span><span class="logo-gav">gav</span><span class="logo-i">i</span></div><div class="logo-sub">Experience Intelligence</div></div>
+        </a>
+        <div class="footer-brand-desc">The Experience Intelligence platform that connects APM, DXS, and NPS in AI-powered causal correlations.</div>
+        <div class="footer-email">contato@cegavi.com</div>
+      </div>
+      <div><div class="footer-col-title">Product</div><ul class="footer-links"><li><a href="/en/#how-it-works">How It Works</a></li><li><a href="/pt/precos.html">Pricing</a></li><li><a href="/pt/blog/">Blog</a></li><li><a href="/pt/#demo">Agendar Demo</a></li></ul></div>
+      <div><div class="footer-col-title">Integrations</div><ul class="footer-links"><li><a href="#">Medallia MEC</a></li><li><a href="#">Medallia DXA</a></li><li><a href="#">Elastic APM</a></li><li><a href="#">Zendesk</a></li></ul></div>
+      <div><div class="footer-col-title">Company</div><ul class="footer-links"><li><a href="#">About</a></li><li><a href="/pt/blog/">Blog</a></li><li><a href="#">Privacy Policy</a></li><li><a href="mailto:contato@cegavi.com">Contact</a></li></ul></div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2025 Cegavi. Todos os direitos reservados.</span>
+      <span>Construído no Brasil 🇧🇷</span>
+    </div>
+  </div>
+</footer>
+
+<script src="/assets/js/main.js"></script>
+<script>
+// Reading progress bar
+(function () {
+  const bar = document.getElementById('progress');
+  const bc  = document.getElementById('breadcrumb');
+  if (!bar) return;
+  function update() {
+    const h = document.documentElement;
+    const pct = (h.scrollTop / (h.scrollHeight - h.clientHeight)) * 100;
+    bar.style.width = Math.min(pct, 100) + '%';
+    if (bc) bc.classList.toggle('visible', h.scrollTop > 200);
+  }
+  window.addEventListener('scroll', update, { passive: true });
+})();
+
+// Share buttons — set URLs dynamically
+(function () {
+  const url   = encodeURIComponent(window.location.href);
+  const title = encodeURIComponent(document.title);
+  const li = document.getElementById('share-linkedin');
+  const tw = document.getElementById('share-twitter');
+  if (li) li.href = `https://www.linkedin.com/sharing/share-offsite/?url=${url}`;
+  if (tw) tw.href = `https://twitter.com/intent/tweet?url=${url}&text=${title}`;
+})();
+</script>
+</body>
+</html>

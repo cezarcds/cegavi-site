@@ -1,0 +1,7 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(git -C c:/Users/55119/Documents/cegavi-site status)"
+    ]
+  }
+}

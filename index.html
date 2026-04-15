@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Cegavi — Experience Intelligence</title>
+<meta name="robots" content="noindex">
+<script>
+  // Detect browser language and redirect
+  // Saved preference takes priority, then browser lang, then default EN
+  var saved = localStorage.getItem('cegavi_lang');
+  var lang  = saved || (navigator.language || navigator.userLanguage || 'en').toLowerCase();
+  var dest  = lang.startsWith('pt') ? '/pt/' : '/en/';
+  // Preserve any path after the root (e.g. utm params)
+  var search = window.location.search;
+  window.location.replace(dest + search);
+</script>
+<noscript>
+  <meta http-equiv="refresh" content="0; url=/en/">
+</noscript>
+</head>
+<body></body>
+</html>
