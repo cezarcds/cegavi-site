@@ -3,6 +3,8 @@
    Shared across all pages (EN + PT)
    ============================================================ */
 
+@import url('https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&display=swap');
+
 /* ── RESET ── */
 *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
