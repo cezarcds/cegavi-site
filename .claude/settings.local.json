@@ -5,7 +5,16 @@
       "Skill(update-config)",
       "Skill(update-config:*)",
       "Read(//c/Users/55119/.claude/**)",
-      "Bash(bash -c \"cd c:/Users/55119/Documents/cegavi-site && git add . && git diff --staged --quiet || \\(git commit -m 'auto: update via Claude Code' && git push\\)\")"
+      "Bash(bash -c \"cd c:/Users/55119/Documents/cegavi-site && git add . && git diff --staged --quiet || \\(git commit -m 'auto: update via Claude Code' && git push\\)\")",
+      "Bash(git -C c:/Users/55119/Documents/cegavi-site config --list)",
+      "Bash(git -C c:/Users/55119/Documents/cegavi-site remote get-url origin)",
+      "Bash(git -C \"c:/Users/55119/Documents/cegavi-site\" remote get-url origin)",
+      "Bash(git -C \"c:/Users/55119/Documents/cegavi-site\" config --list)",
+      "Bash(git credential-manager *)",
+      "Bash(git-credential-manager)",
+      "Bash(where git-credential-manager *)",
+      "Bash(git config *)",
+      "Bash(bash -c \"cd 'c:/Users/55119/Documents/cegavi-site' && git add . && git diff --staged --quiet || \\(git commit -m 'auto: update via Claude Code' && git push\\)\")"
     ]
   }
 }
