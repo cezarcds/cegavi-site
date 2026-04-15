@@ -24,7 +24,7 @@
 | `pt/blog/_TEMPLATE.html` | SVG ícone (nav 36px + footer 28px) + wordmark HTML |
 | `pt/precos.html` | SVG ícone (nav 36px + footer 28px) + wordmark HTML |
 
-*(Excluídos: `index.html` raiz e `en/pricing.html` — são redirects sem HTML visível)*
+*(Excluídos: `index.html` raiz, `en/pricing.html` e `pt/precos.html` — são redirects sem HTML visível)*
 
 ---
 
