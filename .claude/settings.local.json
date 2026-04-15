@@ -4,7 +4,15 @@
       "Bash(git *)",
       "Skill(update-config)",
       "Skill(update-config:*)",
-      "Read(//c/Users/55119/.claude/**)"
+      "Read(//c/Users/55119/.claude/**)",
+      "WebFetch(domain:raw.githubusercontent.com)",
+      "WebFetch(domain:github.com)",
+      "WebFetch(domain:api.github.com)",
+      "Bash(mkdir -p ~/.claude/skills)",
+      "Bash(cp -r /tmp/superpowers/skills/* ~/.claude/skills/)",
+      "Bash(mkdir -p ~/.claude/commands)",
+      "Bash(cp -r /tmp/superpowers/commands/* ~/.claude/commands/)",
+      "Read(//c/Users/55119/Documents/Cegavi-Brandbook/**)"
     ]
   },
   "hooks": {
