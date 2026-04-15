@@ -105,17 +105,9 @@ code {
   letter-spacing: -.02em;
   line-height: 1;
 }
-.logo-ce  { color: var(--ink); }
-.logo-gav { color: var(--blue); }
-.logo-i   { color: var(--teal); position: relative; display: inline-block; }
-.logo-i::before {
-  content: '';
-  position: absolute;
-  top: -3px; left: 0; right: 0;
-  height: 2.5px;
-  background: var(--teal);
-  border-radius: 2px;
-}
+.logo-ce { color: var(--ink); }
+.logo-ga { color: var(--blue); }
+.logo-vi { color: var(--teal); }
 .logo-sub {
   font-family: var(--fm);
   font-size: 8px;
