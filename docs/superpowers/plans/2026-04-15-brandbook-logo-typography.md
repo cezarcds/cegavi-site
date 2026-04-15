@@ -286,25 +286,7 @@ git commit -m "style: update logo icon and wordmark in pt blog template per bran
 
 ---
 
-## Task 9: Atualizar logos em `pt/precos.html`
-
-**Files:**
-- Modify: `pt/precos.html`
-
-- [ ] **Step 1: Substituir SVG nav 36×36**
-- [ ] **Step 2: Corrigir wordmark nav**
-- [ ] **Step 3: Substituir SVG footer 28×28**
-- [ ] **Step 4: Corrigir wordmark footer**
-- [ ] **Step 5: Commit**
-
-```bash
-git add pt/precos.html
-git commit -m "style: update logo icon and wordmark in pt/precos.html per brandbook"
-```
-
----
-
-## Task 10: Verificação final
+## Task 9: Verificação final
 
 - [ ] **Step 1: Confirmar zero ocorrências do SVG antigo**
 
