@@ -56,33 +56,41 @@ async function submitLead(opts = {}) {
   btn.disabled  = true;
   btn.innerHTML = '<span class="btn-spinner">⟳</span> ' + (l === 'en' ? 'Sending…' : 'Enviando…');
 
+  // Build fields — skip empty values so HubSpot doesn't reject them
+  const allFields = [
+    { name: 'firstname',         value: name },
+    { name: 'email',             value: email },
+    { name: 'empresa',           value: company },
+    { name: 'plataformas',       value: platforms },
+    { name: 'principal_desafio', value: message },
+  ].filter(f => f.value !== '');
+
   const hsPayload = {
-    fields: [
-      { name: 'firstname',         value: name },
-      { name: 'email',             value: email },
-      { name: 'empresa',           value: company },
-      { name: 'plataformas',       value: platforms },
-      { name: 'principal_desafio', value: message },
-    ],
-    context: {
-      pageUri:  window.location.href,
-      pageName: document.title,
-    },
+    fields:  allFields,
+    context: { pageUri: window.location.href, pageName: document.title },
   };
 
   let ok = false;
   try {
-    const r = await fetch(CEGAVI.HS_ENDPOINT, {
+    const r    = await fetch(CEGAVI.HS_ENDPOINT, {
       method:  'POST',
       headers: { 'Content-Type': 'application/json' },
       body:    JSON.stringify(hsPayload),
       signal:  AbortSignal.timeout(8000),
     });
-    ok = r.ok;
-  } catch (_) {
-    // Fallback: mailto
-    window.location.href = `mailto:${CEGAVI.EMAIL}?subject=Demo%20%E2%80%94%20${encodeURIComponent(company)}&body=Nome%3A%20${encodeURIComponent(name)}%0AEmail%3A%20${encodeURIComponent(email)}`;
+    const body = await r.json().catch(() => ({}));
+    if (!r.ok) {
+      console.error('[Cegavi] HubSpot error', r.status, body);
+      showMsg(formId, 'err', ERR.send[l] + (body.message ? ' — ' + body.message : ''));
+      btn.disabled = false; btn.textContent = origTxt;
+      return;
+    }
     ok = true;
+  } catch (err) {
+    console.error('[Cegavi] fetch error', err);
+    showMsg(formId, 'err', ERR.send[l]);
+    btn.disabled = false; btn.textContent = origTxt;
+    return;
   }
 
   btn.disabled    = false;
