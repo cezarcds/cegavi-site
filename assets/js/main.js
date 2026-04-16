@@ -11,6 +11,39 @@
   update();
 })();
 
+// ── MOBILE NAV TOGGLE ────────────────────────────────────────
+(function () {
+  const btn     = document.getElementById('nav-toggle');
+  const mobileNav = document.getElementById('mobile-nav');
+  if (!btn || !mobileNav) return;
+
+  btn.addEventListener('click', () => {
+    const open = mobileNav.classList.toggle('open');
+    btn.classList.toggle('open', open);
+    btn.setAttribute('aria-expanded', open);
+    document.body.style.overflow = open ? 'hidden' : '';
+  });
+
+  // Close on link click or outside click
+  mobileNav.querySelectorAll('a').forEach(a => {
+    a.addEventListener('click', () => {
+      mobileNav.classList.remove('open');
+      btn.classList.remove('open');
+      btn.setAttribute('aria-expanded', 'false');
+      document.body.style.overflow = '';
+    });
+  });
+
+  document.addEventListener('click', e => {
+    if (!btn.contains(e.target) && !mobileNav.contains(e.target)) {
+      mobileNav.classList.remove('open');
+      btn.classList.remove('open');
+      btn.setAttribute('aria-expanded', 'false');
+      document.body.style.overflow = '';
+    }
+  });
+})();
+
 // ── LEAD FORM ────────────────────────────────────────────────
 const CEGAVI = {
   HS_ENDPOINT: 'https://api.hsforms.com/submissions/v3/integration/submit/51351337/b5d81c5d-344e-4312-94b3-1f4d0dc5ddc7',
