@@ -13,7 +13,7 @@
 
 // ── LEAD FORM ────────────────────────────────────────────────
 const CEGAVI = {
-  HS_ENDPOINT: 'https://api.hsforms.com/submissions/v3/integration/submit/51351337/2tdgcXTROQxKUsx9NDcXdxw',
+  HS_ENDPOINT: 'https://api.hsforms.com/submissions/v3/integration/submit/51351337/b5d81c5d-344e-4312-94b3-1f4d0dc5ddc7',
   EMAIL:       'contato@cegavi.com',
 };
 
