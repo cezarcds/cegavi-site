@@ -13,9 +13,8 @@
 
 // ── LEAD FORM ────────────────────────────────────────────────
 const CEGAVI = {
-  API:       'https://api.cegavi.com',
-  FORMSPREE: 'https://formspree.io/f/SEU_ID',   // ← replace
-  EMAIL:     'contato@cegavi.com',
+  HS_ENDPOINT: 'https://api.hsforms.com/submissions/v3/integration/submit/51351337/2tdgcXTROQxKUsx9NDcXdxw',
+  EMAIL:       'contato@cegavi.com',
 };
 
 async function submitLead(opts = {}) {
@@ -32,59 +31,65 @@ async function submitLead(opts = {}) {
   if (!form || !btn) return;
 
   const get = id => (document.getElementById(id)?.value || '').trim();
-  const name     = get('lf-name');
-  const email    = get('lf-email');
-  const company  = get('lf-company');
-  const platform = get('lf-platform');
-  const message  = get('lf-message');
+  const name      = get('lf-name');
+  const email     = get('lf-email');
+  const company   = get('lf-company');
+  const message   = get('lf-message');
+  const platforms = [...document.querySelectorAll('input[name="lf-platform"]:checked')]
+    .map(el => el.value).join(';');
 
   // Validation messages
   const ERR = {
-    name:    { en: 'Please enter your name',     pt: 'Informe seu nome' },
-    email:   { en: 'Invalid email',              pt: 'E-mail inválido' },
-    company: { en: 'Please enter your company',  pt: 'Informe sua empresa' },
+    name:    { en: 'Please enter your name',    pt: 'Informe seu nome' },
+    email:   { en: 'Invalid email',             pt: 'E-mail inválido' },
+    company: { en: 'Please enter your company', pt: 'Informe sua empresa' },
     send:    { en: 'Error sending. Write to ' + CEGAVI.EMAIL, pt: 'Erro ao enviar. Escreva para ' + CEGAVI.EMAIL },
   };
   const l = lang.startsWith('pt') ? 'pt' : 'en';
 
   clearMsg(formId);
-  if (!name)                        { showMsg(formId, 'err', ERR.name[l]);    return; }
+  if (!name)                         { showMsg(formId, 'err', ERR.name[l]);    return; }
   if (!email || !email.includes('@')) { showMsg(formId, 'err', ERR.email[l]);   return; }
-  if (!company)                     { showMsg(formId, 'err', ERR.company[l]); return; }
+  if (!company)                      { showMsg(formId, 'err', ERR.company[l]); return; }
 
   const origTxt = btn.textContent;
   btn.disabled  = true;
   btn.innerHTML = '<span class="btn-spinner">⟳</span> ' + (l === 'en' ? 'Sending…' : 'Enviando…');
 
-  const payload = { name, email, company, platform, message, lang, source: 'site' };
-  let ok = false;
+  const hsPayload = {
+    fields: [
+      { name: 'firstname',         value: name },
+      { name: 'email',             value: email },
+      { name: 'empresa',           value: company },
+      { name: 'plataformas',       value: platforms },
+      { name: 'principal_desafio', value: message },
+    ],
+    context: {
+      pageUri:  window.location.href,
+      pageName: document.title,
+    },
+  };
 
+  let ok = false;
   try {
-    const r = await fetch(CEGAVI.API + '/api/leads', {
-      method: 'POST',
+    const r = await fetch(CEGAVI.HS_ENDPOINT, {
+      method:  'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(payload),
-      signal: AbortSignal.timeout(5000),
+      body:    JSON.stringify(hsPayload),
+      signal:  AbortSignal.timeout(8000),
     });
-    ok = (await r.json()).ok;
+    ok = r.ok;
   } catch (_) {
-    try {
-      const fd = new FormData();
-      Object.entries(payload).forEach(([k, v]) => fd.append(k, v));
-      const r = await fetch(CEGAVI.FORMSPREE, { method: 'POST', body: fd, headers: { Accept: 'application/json' } });
-      ok = r.ok;
-    } catch (_) {
-      // Fallback: mailto
-      window.location.href = `mailto:${CEGAVI.EMAIL}?subject=Demo%20%E2%80%94%20${encodeURIComponent(company)}&body=Name%3A%20${encodeURIComponent(name)}%0AEmail%3A%20${encodeURIComponent(email)}`;
-      ok = true;
-    }
+    // Fallback: mailto
+    window.location.href = `mailto:${CEGAVI.EMAIL}?subject=Demo%20%E2%80%94%20${encodeURIComponent(company)}&body=Nome%3A%20${encodeURIComponent(name)}%0AEmail%3A%20${encodeURIComponent(email)}`;
+    ok = true;
   }
 
-  btn.disabled  = false;
+  btn.disabled    = false;
   btn.textContent = origTxt;
 
   if (ok) {
-    form.style.display    = 'none';
+    form.style.display = 'none';
     if (success) {
       success.style.display = 'block';
       const emailEl = document.getElementById('lf-success-email');
