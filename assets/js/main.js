@@ -96,8 +96,9 @@ async function submitLead(opts = {}) {
   btn.disabled    = false;
   btn.textContent = origTxt;
 
-  if (ok) {
-    form.style.display = 'none';
+  // ok is always true here (errors return early above)
+  form.style.display = 'none';
+  if (true) {
     if (success) {
       success.style.display = 'block';
       const emailEl = document.getElementById('lf-success-email');
