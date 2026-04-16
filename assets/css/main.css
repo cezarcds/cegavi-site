@@ -384,44 +384,35 @@ code {
 
 /* ── CHECKBOX GROUP (platforms) ── */
 .check-group {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 7px;
-  margin-top: 2px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 4px;
 }
 .check-item {
-  display: flex;
+  display: inline-flex;
   align-items: center;
-  gap: 8px;
-  padding: 8px 10px;
-  border: 1px solid var(--bd);
-  border-radius: 8px;
+  gap: 6px;
+  padding: 6px 12px;
+  border: 1.5px solid var(--bd);
+  border-radius: 20px;
   cursor: pointer;
-  transition: border-color .13s, background .13s;
+  transition: border-color .13s, background .13s, color .13s;
   font-size: 13px;
   color: var(--ink3);
+  background: var(--white);
   user-select: none;
+  white-space: nowrap;
 }
-.check-item:hover { border-color: var(--blue); background: var(--blue4); color: var(--ink); }
-.check-item input[type="checkbox"] { display: none; }
-.check-item .check-box {
-  width: 15px; height: 15px;
-  border: 1.5px solid var(--bd2);
-  border-radius: 4px;
-  flex-shrink: 0;
-  display: flex; align-items: center; justify-content: center;
-  transition: all .13s;
-  font-size: 10px; color: #fff;
-}
-.check-item input:checked ~ .check-box {
-  background: var(--blue);
+.check-item:hover {
   border-color: var(--blue);
+  color: var(--blue);
 }
-.check-item input:checked ~ .check-box::after { content: '✓'; }
+.check-item input[type="checkbox"] { display: none; }
 .check-item:has(input:checked) {
   border-color: var(--blue);
-  background: var(--blue4);
-  color: var(--ink);
+  background: var(--blue);
+  color: #fff;
 }
 
 /* ── FOOTER ── */
