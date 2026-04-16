@@ -70,7 +70,6 @@ async function submitLead(opts = {}) {
     context: { pageUri: window.location.href, pageName: document.title },
   };
 
-  let ok = false;
   try {
     const r    = await fetch(CEGAVI.HS_ENDPOINT, {
       method:  'POST',
@@ -85,7 +84,6 @@ async function submitLead(opts = {}) {
       btn.disabled = false; btn.textContent = origTxt;
       return;
     }
-    ok = true;
   } catch (err) {
     console.error('[Cegavi] fetch error', err);
     showMsg(formId, 'err', ERR.send[l]);
@@ -95,17 +93,11 @@ async function submitLead(opts = {}) {
 
   btn.disabled    = false;
   btn.textContent = origTxt;
-
-  // ok is always true here (errors return early above)
   form.style.display = 'none';
-  if (true) {
-    if (success) {
-      success.style.display = 'block';
-      const emailEl = document.getElementById('lf-success-email');
-      if (emailEl) emailEl.textContent = email;
-    }
-  } else {
-    showMsg(formId, 'err', ERR.send[l]);
+  if (success) {
+    success.style.display = 'block';
+    const emailEl = document.getElementById('lf-success-email');
+    if (emailEl) emailEl.textContent = email;
   }
 }
 
