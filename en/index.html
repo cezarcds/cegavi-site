@@ -326,16 +326,15 @@
             <input class="form-input" id="lf-email" type="email" placeholder="you@company.com" autocomplete="email">
           </div>
           <div class="form-field">
-            <label class="form-label" for="lf-platform">Platform you use</label>
-            <select class="form-select" id="lf-platform">
-              <option value="">Select…</option>
-              <option>Medallia MEC / DXA</option>
-              <option>Elastic APM</option>
-              <option>Qualtrics XM</option>
-              <option>Zendesk / ServiceNow</option>
-              <option>Datadog</option>
-              <option>Other / Not sure</option>
-            </select>
+            <label class="form-label">Platforms you use <span style="opacity:.5;font-size:8px">(select all that apply)</span></label>
+            <div class="check-group">
+              <label class="check-item"><input type="checkbox" name="lf-platform" value="Medallia MEC / DXA"><span class="check-box"></span>Medallia MEC / DXA</label>
+              <label class="check-item"><input type="checkbox" name="lf-platform" value="Elastic APM"><span class="check-box"></span>Elastic APM</label>
+              <label class="check-item"><input type="checkbox" name="lf-platform" value="Qualtrics XM"><span class="check-box"></span>Qualtrics XM</label>
+              <label class="check-item"><input type="checkbox" name="lf-platform" value="Zendesk / ServiceNow"><span class="check-box"></span>Zendesk / ServiceNow</label>
+              <label class="check-item"><input type="checkbox" name="lf-platform" value="Datadog"><span class="check-box"></span>Datadog</label>
+              <label class="check-item"><input type="checkbox" name="lf-platform" value="Other / Not sure"><span class="check-box"></span>Other / Not sure</label>
+            </div>
           </div>
           <div class="form-field">
             <label class="form-label" for="lf-message">Main challenge <span style="opacity:.5;font-size:8px">(optional)</span></label>
