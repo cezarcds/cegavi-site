@@ -553,15 +553,73 @@ code {
 .mb-6 { margin-bottom: var(--s6); }
 .mb-8 { margin-bottom: var(--s8); }
 
+/* ── HAMBURGER ── */
+.nav-toggle {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  gap: 5px;
+  width: 36px; height: 36px;
+  background: none; border: none;
+  cursor: pointer; padding: 4px;
+  border-radius: 8px;
+  transition: background .13s;
+}
+.nav-toggle:hover { background: var(--gray1); }
+.nav-toggle span {
+  display: block; height: 2px; width: 22px;
+  background: var(--ink); border-radius: 2px;
+  transition: all .22s;
+}
+/* Animated to X when open */
+.nav-toggle.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+.nav-toggle.open span:nth-child(2) { opacity: 0; transform: scaleX(0); }
+.nav-toggle.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+/* ── MOBILE NAV OVERLAY ── */
+.mobile-nav {
+  display: none;
+  position: fixed;
+  top: 64px; left: 0; right: 0;
+  background: rgba(255,255,255,.98);
+  backdrop-filter: blur(16px);
+  border-bottom: 1px solid var(--bd);
+  box-shadow: 0 8px 32px rgba(10,10,15,.08);
+  z-index: 99;
+  padding: var(--s5) var(--s6);
+  flex-direction: column;
+  gap: var(--s3);
+}
+.mobile-nav.open { display: flex; }
+.mobile-nav a {
+  font-size: 16px; font-weight: 500;
+  color: var(--ink3); text-decoration: none;
+  padding: 12px 0;
+  border-bottom: 1px solid var(--bd);
+  transition: color .13s;
+}
+.mobile-nav a:last-child { border-bottom: none; }
+.mobile-nav a:hover, .mobile-nav a.active { color: var(--blue); }
+.mobile-nav .mobile-nav-cta {
+  margin-top: var(--s3);
+  display: flex; gap: var(--s2);
+}
+
 /* ── RESPONSIVE ── */
 @media (max-width: 960px) {
   .nav-links { display: none; }
+  .nav-toggle { display: flex; }
+  .nav-right .btn-ghost { display: none; }
   .footer-grid { grid-template-columns: 1fr 1fr; gap: var(--s6); }
   .blog-grid { grid-template-columns: 1fr 1fr; }
 }
 @media (max-width: 640px) {
   :root { --s9: 64px; }
   .grid-2, .grid-3, .footer-grid, .blog-grid { grid-template-columns: 1fr; }
-  .hero-kpis { gap: var(--s5); padding: 20px 24px; }
+  .hero-kpis { gap: var(--s5); padding: 20px 24px; flex-wrap: wrap; }
   .btn-lg { padding: 12px 22px; font-size: 15px; }
+  .hero-kpis .kpi-sep { display: none; }
+  .container { padding: 0 var(--s4); }
+  .section { padding: var(--s8) var(--s4); }
+  h1 { font-size: clamp(32px, 8vw, 56px); }
 }

@@ -12,7 +12,9 @@
       "Bash(cp -r /tmp/superpowers/skills/* ~/.claude/skills/)",
       "Bash(mkdir -p ~/.claude/commands)",
       "Bash(cp -r /tmp/superpowers/commands/* ~/.claude/commands/)",
-      "Read(//c/Users/55119/Documents/Cegavi-Brandbook/**)"
+      "Read(//c/Users/55119/Documents/Cegavi-Brandbook/**)",
+      "Bash(sed -i 's|<a href=\"/en/pricing\\\\.html\">Pricing</a>|<a href=\"/en/#demo\">Book Demo</a>|g; s|<a href=\"/en/pricing\\\\.html\">Pricing<||g; s|<li><a href=\"/en/pricing\\\\.html\">Pricing</a></li>||g; s|href=\"/en/pricing\\\\.html\">See plans \\\\&amp; pricing|href=\"/en/#demo\">Book Free Demo|g; s|href=\"/en/pricing\\\\.html\">See plans \\\\& pricing|href=\"/en/#demo\">Book Free Demo|g' en/index.html en/blog/index.html en/blog/what-is-experience-intelligence.html en/blog/_TEMPLATE.html)",
+      "Bash(sed -i 's|<a href=\"/pt/precos\\\\.html\">Pricing</a>|<a href=\"/pt/#demo\">Agendar Demo</a>|g; s|<li><a href=\"/pt/precos\\\\.html\">Pricing</a></li>||g; s|href=\"/pt/precos\\\\.html\">Ver planos e preços|href=\"/pt/#demo\">Agendar Demo|g' pt/index.html pt/blog/index.html pt/blog/_TEMPLATE.html)"
     ]
   },
   "hooks": {
